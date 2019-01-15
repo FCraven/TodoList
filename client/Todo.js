@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 
 const Todo = (props) => {
   const todo = props.todo
+  const todoId = todo.id
+  const removeTodo =  props.removeTodo
 
   return (
     <div className='todo row' key={todo.id}>
@@ -13,7 +15,7 @@ const Todo = (props) => {
         <p>Assigned to: {todo.assignee}</p>
       </div>
       <div className='column'>
-        <button className='remove'>Remove</button>
+        <button onClick={() => removeTodo(todoId)} className='remove'>Remove</button>
       </div>
     </div>
   )
