@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from 'axios'
 
 export default class CreateTodo extends Component {
 
@@ -6,7 +7,7 @@ export default class CreateTodo extends Component {
     super(props)
     this.state = {
       taskName:'',
-      assignee:{}
+      assignee: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -19,18 +20,26 @@ export default class CreateTodo extends Component {
     })
   }
 
-  handleSubmit(evt){
-    evt.preventDefault()
-    console.log(`==+-STATE-->`, this.state)
-    this.setState({
-      taskName: '',
-      assignee: {}
-    })
+  async handleSubmit(evt){
+    try{
+      evt.preventDefault()
+      const res = await axios.post('/api/todos',{
+        taskName: this.state.taskName,
+        assignee: this.state.assignee
+      })
+      console.log(res.data)
+      this.setState({
+        taskName: '',
+        assignee: ''
+      })
+    } catch (error) {
+        console.log(error)
+    }
   }
 
   render () {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
 
         <label htmlFor='taskName'>Task Name:</label>
         <input  type='text'
