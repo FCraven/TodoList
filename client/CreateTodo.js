@@ -23,11 +23,8 @@ export default class CreateTodo extends Component {
   async handleSubmit(evt){
     try{
       evt.preventDefault()
-      const res = await axios.post('/api/todos',{
-        taskName: this.state.taskName,
-        assignee: this.state.assignee
-      })
-      console.log(res.data)
+      const res = await axios.post('/api/todos', this.state)
+      this.props.addTodo(res.data)
       this.setState({
         taskName: '',
         assignee: ''
@@ -38,6 +35,8 @@ export default class CreateTodo extends Component {
   }
 
   render () {
+    const {taskName, assignee} = this.state
+
     return (
       <form onSubmit={this.handleSubmit}>
 
@@ -45,7 +44,7 @@ export default class CreateTodo extends Component {
         <input  type='text'
                 name='taskName'
                 placeholder='Task Name'
-                value={this.state.taskName}
+                value={taskName}
                 onChange={this.handleChange}
                 ></input>
 
@@ -53,7 +52,7 @@ export default class CreateTodo extends Component {
         <input  type='text'
                 name='assignee'
                 placeholder='Assigned to...'
-                value={this.state.assignee}
+                value={assignee}
                 onChange={this.handleChange}
                 ></input>
 

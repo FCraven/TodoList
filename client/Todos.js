@@ -9,6 +9,8 @@ export default class Todos extends Component {
     this.state = {
       todos: []
     }
+    this.addTodo = this.addTodo.bind(this
+      )
   }
 
   async componentDidMount () {
@@ -16,10 +18,16 @@ export default class Todos extends Component {
     this.setState({todos: res.data})
   }
 
+  addTodo(todo){
+    this.setState({
+      todos: [...this.state.todos, todo]
+    })
+  }
+
   render () {
     return (
       <div id='todos'>
-        <CreateTodo />
+        <CreateTodo addTodo={this.addTodo} />
         {
           this.state.todos.map(todo => <Todo todo={todo} key={todo.id} />)
         }
