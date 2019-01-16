@@ -2,12 +2,16 @@ import React, {Component} from 'react'
 import TodoForm from './TodoForm'
 import axios from 'axios'
 
+const initialState = {
+  taskName: '',
+  assignee:''
+}
+
 export default class UpdateTodo extends Component {
   constructor() {
     super()
     this.state = {
-      taskName: '',
-      assignee: '',
+      initialState
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,6 +29,9 @@ export default class UpdateTodo extends Component {
     try{
       const res = await axios.put(`/api/todos/${todoId}`, this.state)
       this.props.updateTodo(res.data)
+      this.setState({
+        initialState
+      })
       console.log(res.data)
     } catch(error) {
       console.log(error)

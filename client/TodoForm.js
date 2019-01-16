@@ -21,7 +21,7 @@ const TodoForm = (props) => {
         onChange={handleChange}
         />
 
-<button type='submit'>Submit</button>
+<button type='submit'disabled={!taskName || !assignee}>Submit</button>
 </form>
   )
 }
