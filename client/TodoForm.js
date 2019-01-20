@@ -14,12 +14,7 @@ const TodoForm = (props) => {
         />
 
 <label htmlFor='assignee'>Assignee:</label>
-<input  type='text'
-        name='assignee'
-        placeholder='Assigned to...'
-        value={assignee}
-        onChange={handleChange}
-        />
+
 
 <button type='submit'disabled={!taskName || !assignee}>Submit</button>
 </form>
